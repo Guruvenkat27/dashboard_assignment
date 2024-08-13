@@ -206,10 +206,200 @@ header button:hover {
   border-radius: 5px;
   gap: 5px;
   background-color: rgba(218, 225, 237, 0.526);
-  width: 29vw;
+  width: 32vw;
   padding: 0 6px;
 }
 .input-search input{
   width: 100%;
   background-color: transparent;
+  outline: none;
+}
+/* navbar1 styling */
+.nav1-butt button {
+  
+  font-size: 13px;
+  background-color: white;
+  
+  border-radius: 5px;
+
+}
+.timebutton{
+  color: rgb(26, 3, 130);
+  border: 2px solid rgb(26, 3, 130);
+  
+}
+.otherbutton{
+  
+  border:2px solid rgba(128, 128, 128, 0.508) ;
+}
+
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(3,440px);
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.widget {
+ height: 33vh;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 8px;
+  /* position: relative; */
+}
+
+.add-widget-button {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.remove-widget-button {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.add-widget-form {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  z-index: 10;
+}
+
+.add-widget-form input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.add-widget-form button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  background-color: #4a90e2;
+  color: white;
+}
+
+.legend {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.legend-color {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  margin-right: 8px;
+}
+.add-widget{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dashboard-container {
+  position: relative;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 700px;
+  height: 100vh;
+  background: white;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+  z-index: 1000;
+ 
+  transition: transform 0.3s ease;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs {
+  display: flex;
+ 
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px;
+  font-size: 15px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+
+.tab.active {
+  border-bottom: 2px solid #4a90e2;
+  font-weight: 600;
+}
+
+.sidebar-footer {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  position: absolute;
+  padding: 13px 20px;
+  width: 100%;
+  bottom: 0;
+}
+.sidebar-footer button{
+  width: 8vw;
+  border: 2px solid rgb(2, 2, 110);
+  border-radius: 5px;
+  height:4.7vh;
+  color: rgb(1, 1, 102);
+
+}
+.sidebar-footer button:hover{
+  background-color: rgb(1, 1, 102) ;
+  color: white;
+}
+
+.tabs button {
+  
+ 
+  width: 8vw;
+  border: none;
+  
+  cursor: pointer;
+}
+
+.tabs button:hover {
+  background-color: #357ABD;
+}
+.sidebar-list{
+  padding: 4px 8px;
+  border-radius: 5px;
+  border: 2px solid rgba(128, 128, 128, 0.423);
 }

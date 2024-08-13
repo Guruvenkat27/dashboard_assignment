@@ -14,7 +14,7 @@ const Navbar = () => {
         <FiSearch />
             <input type="search" name="" id="" placeholder='Search anything'/></div>
             <div>
-            <HiOutlineBellAlert />
+            <HiOutlineBellAlert className='text-[26px] opacity-90' />
             </div>
       </nav>
     </div>

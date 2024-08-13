@@ -2,15 +2,18 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Category from './Category';
+import Cspmdashboard from '../dashboards/Cspmdashboard';
+
 
 const Dashboard=()=> {
   const categories = useSelector(state => state.dashboard.categories);
 
   return (
     <div>
-      {categories.map(category => (
+     <Cspmdashboard />
+      {/* {categories.map(category => (
         <Category key={category.id} category={category} />
-      ))}
+      ))} */}
     </div>
   );
 }
