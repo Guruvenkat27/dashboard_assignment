@@ -1,9 +1,11 @@
-// src/app/store.js
+// src/store.js
 import { configureStore } from '@reduxjs/toolkit';
 import dashboardReducer from '../features/Slicing';
 
-export const store = configureStore({
+const Store = configureStore({
   reducer: {
-    dashboard: dashboardReducer
-  }
+    dashboard: dashboardReducer,
+  },
 });
+
+export default Store;
