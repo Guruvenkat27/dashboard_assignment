@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   categories: [
     { id: 'cspm_dashboard', widgets: [] },
+    { id: 'cwpp_dashboard', widgets: [] },
     // other categories...
   ],
 };
@@ -13,17 +14,22 @@ const dashboardSlice = createSlice({
   initialState,
   reducers: {
     addWidget: (state, action) => {
-      const { categoryId, widget } = action.payload;
+      const { categoryId, widget } = action.payload || {};
       const category = state.categories.find((c) => c.id === categoryId);
       if (category) {
-        category.widgets.push(widget);
+        if (!category.widgets.find((w) => w.key === widget.key)) {
+          category.widgets.push(widget);
+        }
       }
     },
     removeWidget: (state, action) => {
-      const { categoryId, widgetId } = action.payload;
+      console.log('removeWidget action.payload:', action.payload);
+      const { categoryId, widgetKey } = action.payload || {};
       const category = state.categories.find((c) => c.id === categoryId);
       if (category) {
-        category.widgets = category.widgets.filter((w) => w.id !== widgetId);
+        console.log('Category before removal:', category.widgets);
+        category.widgets = category.widgets.filter((w) => w.key !== widgetKey);
+        console.log('Category after removal:', category.widgets);
       }
     },
   },

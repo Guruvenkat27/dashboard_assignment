@@ -1,28 +1,38 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Doughnut } from 'react-chartjs-2';
+import { Doughnut, Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import Sidebar from '../components/Sidebar';
 import { addWidget, removeWidget } from '../features/Slicing';
-import { Cspmdata } from '../Data/Data';
+import { Cspmdata} from '../Data/Data'; // Assuming Cspdata contains bar chart data
 
-// Register the chart components
+// Register necessary components
 ChartJS.register(ArcElement, Tooltip, Legend);
+
+const defaultChartData = {
+  labels: [],
+  datasets: [
+    {
+      data: [],
+      backgroundColor: [],
+    },
+  ],
+};
 
 const CspmDashboard = () => {
   const dispatch = useDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
-
   const categoryId = 'cspm_dashboard';
+
+  // Select widgets from the Redux store
   const widgets = useSelector(
     (state) =>
       state.dashboard.categories.find((c) => c.id === categoryId)?.widgets ||
       []
   );
 
-  // Data from the Cspmdata file
-  const cloudAccountsData = Cspmdata.cloudAccountsData || { labels: [], datasets: [] };
-  const riskAssessmentData = Cspmdata.riskAssessmentData || { labels: [], datasets: [] };
+  const cloudAccountsData = Cspmdata.cloudAccountsData || defaultChartData;
+  const riskAssessmentData = Cspmdata.riskAssessmentData || defaultChartData;
 
   const centerTextPlugin = {
     id: 'centerText',
@@ -56,15 +66,20 @@ const CspmDashboard = () => {
   };
 
   const options = {
-    cutout: '65%',
+    cutout: '60%',
     plugins: {
       legend: {
-        display: false, // Disable legend for custom display
+        display: false,
       },
       centerText: {
         display: true,
       },
     },
+  };
+
+  // Handle widget removal
+  const handleRemoveWidget = (widgetKey) => {
+    dispatch(removeWidget({ categoryId, widgetKey }));
   };
 
   return (
@@ -74,90 +89,85 @@ const CspmDashboard = () => {
         {/* Cloud Accounts Widget */}
         <div className="widget">
           <h3 className="w-[100%] px-[15px] font-bold">Cloud Accounts</h3>
-          <div className="flex h-[22vh] mt-4 justify-between px-[25px] items-center">
+          <div className="flex h-[26vh] mt-4 justify-between px-[25px] items-center">
             <Doughnut
               data={cloudAccountsData}
               options={options}
               plugins={[centerTextPlugin]}
             />
             <ul className="legend">
-              <li>
-                <span
-                  className="legend-color"
-                  style={{ backgroundColor: '#4a90e2' }}
-                ></span>
-                Connected (2)
-              </li>
-              <li>
-                <span
-                  className="legend-color"
-                  style={{ backgroundColor: '#c4d8f3' }}
-                ></span>
-                Not Connected (1)
-              </li>
+              {cloudAccountsData.labels.map((label, index) => (
+                <li key={index}>
+                  <span
+                    className="legend-color"
+                    style={{ backgroundColor: cloudAccountsData.datasets[0].backgroundColor[index] }}
+                  />
+                  {label}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        {/* Cloud Account Risk Assessment Widget */}
-        <div className="widget">
-          <h3 className="font-bold w-[100%] px-[15px]">
-            Cloud Account Risk Assessment
-          </h3>
-          <div className="flex h-[22vh] mt-6 justify-between px-[25px] items-center">
+        {/* Risk Assessment Widget */}
+        <div className="widget ">
+          <h3 className="w-[100%] px-[15px] font-bold">Risk Assessment</h3>
+          <div className="flex h-[26vh] mt-4 justify-between px-[25px] items-center">
             <Doughnut
               data={riskAssessmentData}
               options={options}
               plugins={[centerTextPlugin]}
             />
             <ul className="legend">
-              <li>
-                <span
-                  className="legend-color"
-                  style={{ backgroundColor: '#f44336' }}
-                ></span>
-                Failed (1689)
-              </li>
-              <li>
-                <span
-                  className="legend-color"
-                  style={{ backgroundColor: '#ffeb3b' }}
-                ></span>
-                Warning (681)
-              </li>
-              <li>
-                <span
-                  className="legend-color"
-                  style={{ backgroundColor: '#9e9e9e' }}
-                ></span>
-                Not available (36)
-              </li>
-              <li>
-                <span
-                  className="legend-color"
-                  style={{ backgroundColor: '#4caf50' }}
-                ></span>
-                Passed (7253)
-              </li>
+              {riskAssessmentData.labels.map((label, index) => (
+                <li key={index}>
+                  <span
+                    className="legend-color"
+                    style={{ backgroundColor: riskAssessmentData.datasets[0].backgroundColor[index] }}
+                  />
+                  {label}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        {/* Additional Widgets */}
+        {/* Dynamically Render Selected Widgets */}
         {widgets.map((widget) => (
-          <div className="widget" key={widget.key}>
+          <div key={widget.key} className="widget relative p-4 border rounded shadow-md">
             <div className="flex justify-between items-center">
               <h3 className="font-bold">{widget.key}</h3>
               <button
                 className="remove-widget-button"
-                onClick={() =>
-                  dispatch(removeWidget({ categoryId, widgetId: widget.key }))
-                }
+                onClick={() => handleRemoveWidget(widget.key)}
               >
                 ✖
               </button>
             </div>
-            <p>{widget.data}</p>
+            <div className="flex h-[26vh] mt-4 justify-between px-[25px] items-center">
+  <Doughnut
+    data={Cspmdata[widget.key]?.labels ? Cspmdata[widget.key] : defaultChartData}
+    options={options}
+    plugins={[centerTextPlugin]}
+  />
+  {Cspmdata[widget.key]?.labels && (
+    <ul className="legend">
+      {Cspmdata[widget.key].labels.map((label, index) => (
+        <li key={index}>
+          <span
+            className="legend-color"
+            style={{
+              backgroundColor:
+                Cspmdata[widget.key]?.datasets[0]?.backgroundColor[index] || '#000',
+            }}
+          />
+          {label}
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
+
           </div>
         ))}
 
@@ -172,13 +182,14 @@ const CspmDashboard = () => {
         </div>
       </div>
 
-      {/* Sidebar for adding widgets */}
+      {/* Sidebar Component */}
       {showSidebar && (
         <Sidebar
-          onConfirm={(selectedWidgets) => {
-            selectedWidgets.forEach((widget) =>
-              dispatch(addWidget({ categoryId, widget }))
-            );
+          activeWidgetType="CSPM" // Set active widget type to CSPM
+          onConfirm={(widgets) => {
+            widgets.forEach((widget) => {
+              dispatch(addWidget({ categoryId: 'cspm_dashboard', widget }));
+            });
             setShowSidebar(false);
           }}
           onCancel={() => setShowSidebar(false)}

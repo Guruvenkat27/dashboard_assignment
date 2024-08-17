@@ -88,12 +88,12 @@ header button:hover {
 }
 
 .widget {
-  flex: 1 1 300px;
+  /* flex: 1 1 300px; */
   background-color: #f9f9f9;
   border-radius: 5px;
   border: 1px solid #ddd;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 15px;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -236,18 +236,18 @@ header button:hover {
 
 .dashboard {
   display: grid;
-  grid-template-columns: repeat(3,440px);
+  grid-template-columns: repeat(3,470px);
   flex-wrap: wrap;
   gap: 16px;
   justify-content: center;
 }
 
 .widget {
- height: 33vh;
+ height: 38vh;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 16px;
+  padding: 14px 17px;
   margin: 8px;
   /* position: relative; */
 }

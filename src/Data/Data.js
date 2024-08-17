@@ -60,7 +60,7 @@ export const Cspmdata = {
       datasets: [
         {
           label: "Alerts",
-          data: [5, 3, 7, 2, 9], // Sample data values for alerts
+          data: [5, 3, 7, 2, 9],
           backgroundColor: [
             "rgba(75, 192, 192, 0.8)",
             "rgba(54, 162, 235, 0.8)",
@@ -85,7 +85,7 @@ export const Cspmdata = {
       datasets: [
         {
           label: "Alerts",
-          data: [4, 6, 8, 1, 3], // Sample data values for workload alerts
+          data: [4, 6, 8, 1, 3],
           backgroundColor: [
             "rgba(255, 99, 132, 0.8)",
             "rgba(54, 162, 235, 0.8)",
@@ -110,7 +110,7 @@ export const Cspmdata = {
       datasets: [
         {
           label: "Sales",
-          data: [150, 230, 180, 200, 250], // Example sales data
+          data: [150, 230, 180, 200, 250],
           backgroundColor: [
             "rgba(255, 99, 132, 0.8)",
             "rgba(54, 162, 235, 0.8)",
@@ -135,7 +135,7 @@ export const Cspmdata = {
       datasets: [
         {
           label: "Performance",
-          data: [60, 70, 80, 55, 90], // Sample performance metrics
+          data: [60, 70, 80, 55, 90],
           backgroundColor: [
             "rgba(153, 102, 255, 0.8)",
             "rgba(255, 159, 64, 0.8)",
@@ -160,24 +160,25 @@ export const Cspmdata = {
       datasets: [
         {
           label: "Utilization",
-          data: [75, 60, 85, 50, 40], // Resource utilization data
+          data: [70, 65, 80, 55, 90],
           backgroundColor: [
-            "rgba(255, 99, 132, 0.8)",
-            "rgba(54, 162, 235, 0.8)",
-            "rgba(255, 206, 86, 0.8)",
             "rgba(75, 192, 192, 0.8)",
             "rgba(153, 102, 255, 0.8)",
+            "rgba(255, 159, 64, 0.8)",
+            "rgba(54, 162, 235, 0.8)",
+            "rgba(255, 99, 132, 0.8)",
           ],
           borderColor: [
-            "rgba(255, 99, 132, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
             "rgba(75, 192, 192, 1)",
             "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 99, 132, 1)",
           ],
           borderWidth: 1,
         },
       ],
     },
   };
+  
   

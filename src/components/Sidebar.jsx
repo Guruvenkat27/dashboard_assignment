@@ -14,23 +14,11 @@ const Sidebar = ({ onConfirm, onCancel }) => {
   };
 
   const tabs = [
-    { name: 'CSPM', dataKey: 'Cspmdata' },
-    { name: 'CWPP', dataKey: 'Cwpmdata' },
+    { name: 'CSPM', data: Cspmdata },
+    { name: 'CWPP', data: Cwpmdata },
   ];
 
-  const getData = (tabName) => {
-    switch (tabName) {
-      case 'CSPM':
-        return Cspmdata;
-      case 'CWPP':
-        return Cwpmdata;
-      default:
-        return {};
-    }
-  };
-
-  const currentData = getData(activeTab);
-  const dataKeys = Object.keys(currentData);
+  const currentTabData = tabs.find((tab) => tab.name === activeTab)?.data || {};
 
   return (
     <div className="sidebar">
@@ -39,7 +27,7 @@ const Sidebar = ({ onConfirm, onCancel }) => {
         <span className="cursor-pointer" onClick={onCancel}>X</span>
       </div>
       <div className="sidebar-content">
-        <h3 className="px-4 py-3">Personalize your dashboard by adding the following widget</h3>
+        <h3 className="px-4 py-3">Personalize your dashboard by adding the following widgets:</h3>
         <div className="tabs">
           {tabs.map((tab) => (
             <button
@@ -52,8 +40,8 @@ const Sidebar = ({ onConfirm, onCancel }) => {
           ))}
         </div>
         <ul className="px-5 flex flex-col gap-3">
-          {dataKeys.length > 0 ? (
-            dataKeys.map((key) => (
+          {Object.keys(currentTabData).length > 0 ? (
+            Object.keys(currentTabData).map((key) => (
               <li key={key} className="sidebar-list">
                 <div className="widget-group flex gap-2">
                   <label className="flex items-center gap-2">
@@ -74,7 +62,7 @@ const Sidebar = ({ onConfirm, onCancel }) => {
       </div>
       <div className="sidebar-footer">
         <button onClick={onCancel}>Cancel</button>
-        <button onClick={() => onConfirm(selectedWidgets.map(key => ({ key, data: currentData[key] })))}>
+        <button onClick={() => onConfirm(selectedWidgets)}>
           Confirm
         </button>
       </div>
